@@ -12,17 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set GIT_CONFIG
-        env: 
-          GIT_CONFIG: main/.gitconfig  # Replace with the actual path
-        run: |
-          echo "Using separate GIT_CONFIG: ${{ env.GIT_CONFIG }}"
-
-      # Install AIDL (Android Interface Definition Language)
-      - name: Install AIDL
-        run: |
-          sudo apt-get update
-          sudo apt-get install aidl
 
       # Get the current date
       - name: Get Date
