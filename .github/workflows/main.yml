@@ -14,7 +14,7 @@ jobs:
 
       - name: Set GIT_CONFIG
         env: 
-          GIT_CONFIG: Amanwadalii/project/.gitconfig  # Replace with the actual path
+          GIT_CONFIG: main/.gitconfig  # Replace with the actual path
         run: |
           echo "Using separate GIT_CONFIG: ${{ env.GIT_CONFIG }}"
 
@@ -30,7 +30,7 @@ jobs:
         run: |
           echo "date=$(date -u '+%Y%m%d')" >> $GITHUB_ENV
         shell: bash
-
+      
       # Cache Buildozer global directory
       - uses: actions/cache@v4
         with:
