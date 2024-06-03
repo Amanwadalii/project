@@ -42,7 +42,17 @@ jobs:
         with:
           path: .buildozer
           key: ${{ runner.os }}-${{ steps.get-date.outputs.date }}-${{ hashFiles('buildozer.spec') }}
+      - name: Set GIT_CONFIG
+        env: 
+          GIT_CONFIG: main/.gitconfig  # Replace with the actual path
+        run: |
+          echo "Using separate GIT_CONFIG: ${{ env.GIT_CONFIG }}"
 
+      # Install AIDL (Android Interface Definition Language)
+      - name: Install AIDL
+        run: |
+          sudo apt-get update
+          sudo apt-get install aidl
       # Build with Buildozer
       - name: Build with Buildozer
         uses: ArtemSBulgakov/buildozer-action@v1.1.3
