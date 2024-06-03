@@ -12,6 +12,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set GIT_CONFIG
+        env:
+          GIT_CONFIG: ${{ github.workspace }}/.gitconfig  # Point to the new file
+        run: |
+          echo "Using separate GIT_CONFIG: ${{ github.workspace }}/.gitconfig"
+
       # Install AIDL (Android Interface Definition Language)
       - name: Install AIDL
         run: |
