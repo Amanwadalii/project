@@ -13,10 +13,10 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set GIT_CONFIG
-        env:
-          GIT_CONFIG: ${{ project }}/.gitconfig  # Point to the new file
+        env: 
+          GIT_CONFIG: project.gitconfig  # Replace with the actual path
         run: |
-          echo "Using separate GIT_CONFIG: ${{ project }}/.gitconfig"
+          echo "Using separate GIT_CONFIG: ${{ env.GIT_CONFIG }}"
 
       # Install AIDL (Android Interface Definition Language)
       - name: Install AIDL
