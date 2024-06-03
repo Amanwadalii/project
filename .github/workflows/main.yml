@@ -14,7 +14,7 @@ jobs:
 
       - name: Set GIT_CONFIG
         env: 
-          GIT_CONFIG: project.gitconfig  # Replace with the actual path
+          GIT_CONFIG: Amanwadalii/project/.gitconfig  # Replace with the actual path
         run: |
           echo "Using separate GIT_CONFIG: ${{ env.GIT_CONFIG }}"
 
