@@ -11,6 +11,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install AIDL
+        run: |
+          sudo apt-get update
+          sudo apt-get install aidl
+
       # used to cache dependencies with a timeout
       - name: Get Date
         id: get-date
