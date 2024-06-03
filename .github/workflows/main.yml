@@ -33,7 +33,7 @@ jobs:
           key: ${{ runner.os }}-${{ steps.get-date.outputs.date }}-${{ hashFiles('buildozer.spec') }}
       - name: Set GIT_CONFIG
         env: 
-          GIT_CONFIG: main/.gitconfig  # Replace with the actual path
+          GIT_CONFIG: .gitconfig  # Replace with the actual path
         run: |
           echo "Using separate GIT_CONFIG: ${{ env.GIT_CONFIG }}"
 
