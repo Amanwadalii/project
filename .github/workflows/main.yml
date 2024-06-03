@@ -1,59 +1,44 @@
-name: Build KivyMD APK
-
+name: CI
 on:
   push:
-    branches: [ master ]
+    branches: 
+       - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Set up Python environment
-        uses: actions/setup-python@v3
+      # used to cache dependencies with a timeout
+      - name: Get Date
+        id: get-date
+        run: |
+          echo "::set-output name=date::$(/bin/date -u "+%Y%m%d")"
+        shell: bash
+
+      - name: Cache Buildozer global directory
+        uses: actions/cache@v4
         with:
-          python-version: 3.x  # Replace with your desired Python version
+          path: .buildozer_global
+          key: buildozer-global-${{ hashFiles('buildozer.spec') }} # Replace with your path
 
-      - name: Install buildozer
-        run: |
-          pip install buildozer
-
-      - name: Install Kivy and KivyMD (adjust requirements as needed)
-        run: |
-          pip install kivy kivymd
-
-      - name: Install additional requirements (if any)
-        run: |
-          pip install your-other-requirements  # Replace with your specific requirements
-
-      - name: Install Node.js (latest stable version)
-        uses: actions/setup-node@v3
+      - uses: actions/cache@v4
         with:
-          node-version: 'lts/*'
+          path: .buildozer
+          key: ${{ runner.os }}-${{ steps.get-date.outputs.date }}-${{ hashFiles('buildozer.spec') }}
 
-      - name: Install AIDL
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libxml2-dev libxslt1-dev zlib1g-dev libncurses5-dev autoconf bison libssl-dev libreadline-dev libffi-dev libsqlite3-dev wget curl llvm
-
-      - name: Initialize buildozer
-        run: buildozer init
-
-      - name: buildozer.spec (adjust as needed)
-        run: |
-          # Open buildozer.spec in a text editor
-          sed -i 's/android.permissions=[\'\"]/android.permissions=["READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE"]/' buildozer.spec  # Add desired permissions
-          # Add other customizations to buildozer.spec
-
-      - name: Build APK (debug or release)
-        run: |
-          buildozer android debug  # For debug build
-          # Or:
-          # buildozer android release  # For release build
-
-      - name: Archive APK
-        uses: actions/upload-artifact@v3
+      - name: Build with Buildozer
+        uses: ArtemSBulgakov/buildozer-action@v4
+        id: buildozer
         with:
-          name: my_app.apk
-          path: bin/my_app.apk  # Replace with actual APK output path based on your buildozer.spec configuration
+          command: buildozer android debug
+          buildozer_version: master
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: package
+          path: ${{ steps.buildozer.outputs.filename }}
+     
