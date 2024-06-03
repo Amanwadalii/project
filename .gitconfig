@@ -1,1 +1,2 @@
-
+[http]
+    unset https://github.com/.extraheader
