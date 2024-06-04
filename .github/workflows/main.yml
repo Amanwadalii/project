@@ -46,11 +46,9 @@ jobs:
 
       # Build with Buildozer
       - name: Build with Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v1.1.3
-        id: buildozer
-        with:
-          command: echo y | buildozer -v android debug
-          buildozer_version: master
+        run: |
+          buildozer --version  # Debugging: Verify Buildozer version
+          echo y | buildozer -v android debug  # Debugging: Try running the Buildozer command directly
 
       # Upload artifacts
       - name: Upload artifacts
@@ -58,5 +56,3 @@ jobs:
         with:
           name: package
 
-
-    
