@@ -1,4 +1,4 @@
-name: CI
+name: Build KivyMD APK
 
 on:
   push:
@@ -7,52 +7,29 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: macos-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      # Get the current date
-      - name: Get Date
-        id: get-date
-        run: |
-          echo "date=$(date -u '+%Y%m%d')" >> $GITHUB_ENV
-        shell: bash
-
-      # Cache Buildozer global directory
-      - uses: actions/cache@v4
+      - name: Setup Python
+        uses: actions/setup-python@v2
         with:
-          path: .buildozer_global
-          key: buildozer-global-${{ hashFiles('buildozer.spec') }}
+          python-version: 3.8  # Choose your Python version
 
-      # Cache Buildozer local directory
-      - uses: actions/cache@v4
+      - name: Install build dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install buildozer cython==0.29.33 kivy kivymd
+
+      - name: Build APK
+        run: |
+          buildozer init
+          buildozer -v android debug
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v2
         with:
-          path: .buildozer
-          key: ${{ runner.os }}-${{ steps.get-date.outputs.date }}-${{ hashFiles('buildozer.spec') }}
-
-      - name: Set GIT_CONFIG
-        env: 
-          GIT_CONFIG: .gitconfig  # Replace with the actual path
-        run: |
-          echo "Using separate GIT_CONFIG: ${{ env.GIT_CONFIG }}"
-
-      # Install AIDL (Android Interface Definition Language)
-      - name: Install AIDL
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y aidl
-          which aidl  # Debugging: Verify if AIDL is in the PATH
-
-      # Build with Buildozer
-      - name: Build with Buildozer
-        run: |
-          buildozer --version  # Debugging: Verify Buildozer version
-          echo y | buildozer -v android debug  # Debugging: Try running the Buildozer command directly
-
-      # Upload artifacts
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: package
-
+          name: app-debug.apk
+          path: ./bin/*.apk
