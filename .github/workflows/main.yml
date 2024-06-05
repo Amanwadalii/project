@@ -39,9 +39,9 @@ jobs:
         id: buildozer
         with:
           command: | 
-           sudo apt-get update &&
+           
            sudo apt-get install aidl &&
-           sudo apt-get install build-essential libstdc++6 &&
+           
            
            buildozer -v android debug
           buildozer_version: master
