@@ -39,10 +39,6 @@ jobs:
         id: buildozer
         with:
           command: | 
-           
-           sudo apt-get install aidl &&
-           
-           
            buildozer -v android debug
           buildozer_version: master
 
