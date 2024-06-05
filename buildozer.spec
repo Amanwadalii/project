@@ -122,7 +122,7 @@ android.permissions = android.permission.INTERNET,name=android.permission.READ_E
 #android.ndk_path =
 
 # (str) Android SDK directory (if empty, it will be automatically downloaded.)
-#android.sdk_path =
+android.sdk_path = C:\Users\Aman Wadali\AppData\Local\Android\Sdk
 
 # (str) ANT directory (if empty, it will be automatically downloaded.)
 #android.ant_path =
