@@ -37,7 +37,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy==2.3.0 ,pillow==10.3.0,kivymd==1.1.1Kivy-Garden==0.1.5 ,certifi==2024.2.2 ,charset-normalizer==3.3.2 ,docutils==0.21.2 ,idna==3.7,pygments==2.18.0, pypiwin32==223 ,pywin32==306 ,requests==2.32.3 ,urllib3==2.2.1
+requirements = python3,kivy==2.3.0 ,pillow==10.3.0,kivymd==1.1.1Kivy-Garden ,docutils==0.21.2 ,requests==2.32.3 
 
 
 # (str) Custom source folders for requirements
@@ -48,7 +48,7 @@ requirements = python3,kivy==2.3.0 ,pillow==10.3.0,kivymd==1.1.1Kivy-Garden==0.1
 #presplash.filename = %(source.dir)s/data/presplash.png
 
 # (str) Icon of the application
-icon.filename =main/icon.png
+icon.filename =icon.png
 
 # (list) Supported orientations
 # Valid options are: landscape, portrait, portrait-reverse or landscape-reverse
