@@ -8,6 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    
 
     steps:
       - uses: actions/checkout@v4
@@ -34,21 +35,17 @@ jobs:
       
         
       # Build with Buildozer
-      - name: Install AIDL
-        id: aidl
-        with:
-          command: |
-          
-           sudo apt-get update &&
-           sudo apt-get install aidl
+      
       - name: Build with Buildozer
         uses: ArtemSBulgakov/buildozer-action@v1.1.3
         id: buildozer
         with:
           commands: | 
-          
+            
+            sudo apt-get update
+            sudo apt-get install aidl
            
-           buildozer -v android debug
+            buildozer -v android debug
           buildozer_version: master
 
       # Upload artifacts
