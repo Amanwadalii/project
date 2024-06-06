@@ -34,14 +34,19 @@ jobs:
       
         
       # Build with Buildozer
+      - name: Install AIDL
+        id: aidl
+        with:
+          command: |
+          
+           sudo apt-get update &&
+           sudo apt-get install aidl
       - name: Build with Buildozer
         uses: ArtemSBulgakov/buildozer-action@v1.1.3
         id: buildozer
         with:
           commands: | 
-           sudo apt-get update &&
-           sudo apt-get install aidl &&
-           sudo apt-get install build-essential libstdc++6 &&
+          
            
            buildozer -v android debug
           buildozer_version: master
