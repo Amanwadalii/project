@@ -1,19 +1,19 @@
 [app]
 
 # (str) Title of your application
-title = EasyLister
+title = Easylister
 
 # (str) Package name
-package.name = easylisterapp
+package.name = myeasyapp
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = org.easylisterapp
+package.domain = org.easylister
 
 # (str) Source code where the main.py live
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,png,jpg,kv,ttf,atlas
+source.include_exts = py,png,jpg,kv,atlas,ttf
 
 # (list) List of inclusions using pattern matching
 #source.include_patterns = assets/*,images/*.png
@@ -37,8 +37,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy==2.3.0 ,pillow==10.3.0,kivymd==1.1.1,Kivy-Garden ,docutils ,requests,pyjnius 
-
+requirements = python3,kivy==2.3.0,pillow,kivymd==1.1.1, docutils, pyjnius, Kivy-Garden, pygments, pypiwin32
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -48,7 +47,7 @@ requirements = python3,kivy==2.3.0 ,pillow==10.3.0,kivymd==1.1.1,Kivy-Garden ,do
 #presplash.filename = %(source.dir)s/data/presplash.png
 
 # (str) Icon of the application
-icon.filename =icon.png
+#icon.filename = icon.png
 
 # (list) Supported orientations
 # Valid options are: landscape, portrait, portrait-reverse or landscape-reverse
@@ -75,7 +74,7 @@ osx.kivy_version = 1.9.1
 #
 
 # (bool) Indicate if the application should be fullscreen or not
-fullscreen = 1
+fullscreen = 0
 
 # (string) Presplash background color (for android toolchain)
 # Supported formats are: #RRGGBB #AARRGGBB or one of the following names:
@@ -96,7 +95,8 @@ fullscreen = 1
 
 # (list) Permissions
 # (See https://python-for-android.readthedocs.io/en/latest/buildoptions/#build-options-1 for all the supported syntaxes and properties)
-android.permissions = android.permission.INTERNET,name=android.permission.READ_EXTERNAL_STORAGE,name=android.permission.WRITE_EXTERNAL_STORAGE
+android.permissions = android.permission.INTERNET, name=android.permission.WRITE_EXTERNAL_STORAGE
+
 # (list) features (adds uses-feature -tags to manifest)
 #android.features = android.hardware.usb.host
 
@@ -122,7 +122,7 @@ android.permissions = android.permission.INTERNET,name=android.permission.READ_E
 #android.ndk_path =
 
 # (str) Android SDK directory (if empty, it will be automatically downloaded.)
-#android.sdk_path = 
+#android.sdk_path =
 
 # (str) ANT directory (if empty, it will be automatically downloaded.)
 #android.ant_path =
@@ -450,3 +450,4 @@ warn_on_root = 1
 #    Then, invoke the command line with the "demo" profile:
 #
 #buildozer --profile demo android debug
+
